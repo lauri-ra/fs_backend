@@ -31,15 +31,19 @@ app.get('/api/persons', (request, response) => {
 })
 
 app.get('/info', (request, response) => {
-    const count = persons.length
-    const date = new Date()
+    Person
+        .find({})
+        .then(persons => {
+            count = persons.length
+            const date = new Date()
 
-    response.send(
-        `<div> 
-            <p>Phonebook has info for ${count} people<p>
-            <p>${date}<p>
-        </div>`
-    )
+            response.send(
+                `<div> 
+                    <p>Phonebook has info for ${count} people<p>
+                    <p>${date}<p>
+                </div>`
+            )
+        })
 })
 
 app.get('/api/persons/:id', (request, response, next) => {
@@ -83,6 +87,22 @@ app.post('/api/persons', (requests, response, next) => {
     person.save()
         .then(savedPerson => {
             response.json(savedPerson)
+        })
+        .catch(error => next(error))
+})
+
+app.put('/api/persons/:id', (requests, response, next) => {
+    const body = requests.body
+
+    const person = {
+        id: body.id,
+        name: body.name,
+        number: body.number,
+    }
+
+    Person.findByIdAndUpdate(requests.params.id, person, {new: true})
+        .then(updatedPerson => {
+            response.json(updatedPerson)
         })
         .catch(error => next(error))
 })
