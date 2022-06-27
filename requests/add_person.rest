@@ -1,7 +1,7 @@
-POST https://blooming-lake-05294.herokuapp.com/api/persons
+POST http://localhost:3001/api/persons
 Content-Type: application/json
 
 {
-   "name": "New Person",
+   "name": "New",
    "number": "000-111-222"
 }
