@@ -7,7 +7,7 @@ if(process.argv.length < 3) {
 
 const password = process.argv[2]
 
-const url  = 
+const url  =
 `mongodb+srv://fullstack:${password}@fullstack.w4z1g.mongodb.net/?retryWrites=true&w=majority`
 
 mongoose.connect(url)
@@ -34,7 +34,7 @@ if(process.argv.length === 3) {
             result.forEach(person => {
                 console.log(person.name, person.number)
             })
-        mongoose.connection.close()
+            mongoose.connection.close()
         })
 }
 
